@@ -66,14 +66,19 @@
 
           <details class="add-task">
             <summary class="btn btn-primary">+ New task</summary>
-            <form class="add-task-panel" method="post" action="#">
+            <form class="add-task-panel" method="post" action="{% url 'main:create_post' %}">
+              {% csrf_token %}
+
               <input type="text" name="title" placeholder="Task title" required>
-              <select name="list">
-                <option value="work">Work</option>
-                <option value="personal">Personal</option>
-                <option value="errands">Errands</option>
+              
+              <select name="category_id">
+                {% for ctg in categories %}
+                  <option value="{{ ctg.id }}">{{ ctg.name }}</option>
+                {% endfor %}
               </select>
-              <input type="date" name="due_date">
+
+              
+              <input type="date" name="due_date" required>
               <button class="btn btn-primary" type="submit">Add task</button>
             </form>
           </details>
@@ -89,18 +94,22 @@
 
 
           {% for task in todays %}
-          <li class="task-row">
-            <form method="post" action="#" class="toggle-form">
+          <li class="task-row ">
+            <form method="post" action="{% url 'main:task_done' %}" class="toggle-form">
+              {% csrf_token %}
+              <input type="text" name="task_id" value="{{task.id}}" hidden>
               <button type="submit" class="task-check" aria-pressed="false" aria-label="Mark task as done"></button>
             </form>
-            <div class="task-body">
-              <p class="task-title">{{ task.name }}</p>
+            <div class="task-body ">
+              <p class="task-title ">{{ task.name }}</p>
               <div class="task-meta">
                 <span class="tag">{{ task.category.name }}</span>
                 <span class="due overdue">{{ task.due }}</span>
               </div>
             </div>
-            <form method="post" action="#" class="delete-form">
+            <form method="post" action="{% url 'main:delete' %}" class="delete-form">
+              {% csrf_token %}
+              <input type="text" value="{{ task.id }}" name="task_id" hidden>
               <button class="task-menu" type="submit" aria-label="Delete task">✕</button>
             </form>
           </li>
@@ -111,90 +120,30 @@
 
       <section class="task-section">
         <div class="task-section-head">
-          <h2>This week</h2>
+          <h2>Others</h2>
           <span class="tally">5</span>
         </div>
         <ul class="task-list">
 
+          {% for task in others %}
           <li class="task-row">
             <form method="post" action="#" class="toggle-form">
               <button type="submit" class="task-check" aria-pressed="false" aria-label="Mark task as done"></button>
             </form>
             <div class="task-body">
-              <p class="task-title">Prepare slides for Monday's team sync</p>
+              <p class="task-title">{{ task.name }}</p>
               <div class="task-meta">
-                <span class="tag">Work</span>
-                <span class="due">Fri, 12 Sep</span>
+                <span class="tag">{{ task.category.name }}</span>
+                <span class="due">{{ task.due }}</span>
               </div>
             </div>
-            <form method="post" action="#" class="delete-form">
+            <form method="post" action="{% url 'main:delete' %}" class="delete-form">
+              {% csrf_token %}
+              <input type="text" value="{{ task.id }}" name="task_id" hidden>
               <button class="task-menu" type="submit" aria-label="Delete task">✕</button>
             </form>
           </li>
-
-          <li class="task-row">
-            <form method="post" action="#" class="toggle-form">
-              <button type="submit" class="task-check" aria-pressed="false" aria-label="Mark task as done"></button>
-            </form>
-            <div class="task-body">
-              <p class="task-title">Renew car insurance</p>
-              <div class="task-meta">
-                <span class="tag">Personal</span>
-                <span class="due">Sat, 13 Sep</span>
-              </div>
-            </div>
-            <form method="post" action="#" class="delete-form">
-              <button class="task-menu" type="submit" aria-label="Delete task">✕</button>
-            </form>
-          </li>
-
-          <li class="task-row">
-            <form method="post" action="#" class="toggle-form">
-              <button type="submit" class="task-check" aria-pressed="false" aria-label="Mark task as done"></button>
-            </form>
-            <div class="task-body">
-              <p class="task-title">Grocery run — produce and coffee</p>
-              <div class="task-meta">
-                <span class="tag">Errands</span>
-                <span class="due">Sun, 14 Sep</span>
-              </div>
-            </div>
-            <form method="post" action="#" class="delete-form">
-              <button class="task-menu" type="submit" aria-label="Delete task">✕</button>
-            </form>
-          </li>
-
-          <li class="task-row">
-            <form method="post" action="#" class="toggle-form">
-              <button type="submit" class="task-check" aria-pressed="false" aria-label="Mark task as done"></button>
-            </form>
-            <div class="task-body">
-              <p class="task-title">Draft onboarding doc for new hire</p>
-              <div class="task-meta">
-                <span class="tag">Work</span>
-                <span class="due">Mon, 15 Sep</span>
-              </div>
-            </div>
-            <form method="post" action="#" class="delete-form">
-              <button class="task-menu" type="submit" aria-label="Delete task">✕</button>
-            </form>
-          </li>
-
-          <li class="task-row">
-            <form method="post" action="#" class="toggle-form">
-              <button type="submit" class="task-check" aria-pressed="false" aria-label="Mark task as done"></button>
-            </form>
-            <div class="task-body">
-              <p class="task-title">Call mom for her birthday planning</p>
-              <div class="task-meta">
-                <span class="tag">Personal</span>
-                <span class="due">Tue, 16 Sep</span>
-              </div>
-            </div>
-            <form method="post" action="#" class="delete-form">
-              <button class="task-menu" type="submit" aria-label="Delete task">✕</button>
-            </form>
-          </li>
+          {% endfor %}
 
         </ul>
       </section>

@@ -18,7 +18,8 @@ class CategoryTask(models.Model):
 class Task(models.Model):
     name = models.CharField(max_length=300)
     due = models.DateTimeField(blank=False)
-
+    status = models.BooleanField(default=False)
+    
     category = models.ForeignKey(CategoryTask, on_delete=models.CASCADE)
 
 
