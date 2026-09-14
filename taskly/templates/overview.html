@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ledger — Overview</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+
+    <!-- ============ Sidebar ============ -->
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">Ledger</span>
+        <span class="brand-tagline">tasks, kept plainly</span>
+      </div>
+
+      <nav class="nav-group">
+        <p class="nav-label">MENU</p>
+        <a class="nav-link" href="index.html">
+          <span>Board</span>
+          <span class="count">9</span>
+        </a>
+        <a class="nav-link is-active" href="overview.html">
+          <span>Overview</span>
+        </a>
+      </nav>
+
+      <nav class="nav-group">
+        <p class="nav-label">LISTS</p>
+        <a class="nav-link" href="#" style="--dot:#355E4C">
+          <span><span class="list-dot"></span>Work</span>
+          <span class="count">4</span>
+        </a>
+        <a class="nav-link" href="#" style="--dot:#9C7A3C">
+          <span><span class="list-dot"></span>Personal</span>
+          <span class="count">3</span>
+        </a>
+        <a class="nav-link" href="#" style="--dot:#7A5CA8">
+          <span><span class="list-dot"></span>Errands</span>
+          <span class="count">2</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="theme-toggle">
+          <span class="theme-toggle-label">Dark mode</span>
+          <button class="switch" id="themeSwitch" type="button" aria-label="Toggle dark mode" aria-pressed="false"></button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ============ Main ============ -->
+    <main class="main">
+      <header class="main-header">
+        <div>
+          <h1>Overview</h1>
+          <p class="subtext">How the week has gone so far</p>
+        </div>
+        <div class="header-actions">
+          <form class="range-toggle" method="get" action="#">
+            <button type="submit" name="range" value="week" class="is-active">Week</button>
+            <button type="submit" name="range" value="month">Month</button>
+          </form>
+        </div>
+      </header>
+
+      <section class="stat-strip">
+        <div class="stat">
+          <div class="stat-value">18</div>
+          <div class="stat-label">Completed this week</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">6</div>
+          <div class="stat-label">Day streak</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">2.6</div>
+          <div class="stat-label">Average per day</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">92%</div>
+          <div class="stat-label">On-time completion</div>
+        </div>
+      </section>
+
+      <section class="chart-block">
+        <h2>Tasks completed by day</h2>
+        <div class="bars">
+          <div class="bar-col"><div class="bar" style="height:38%"></div><span class="bar-day">Fri</span></div>
+          <div class="bar-col"><div class="bar" style="height:62%"></div><span class="bar-day">Sat</span></div>
+          <div class="bar-col"><div class="bar" style="height:20%"></div><span class="bar-day">Sun</span></div>
+          <div class="bar-col"><div class="bar" style="height:80%"></div><span class="bar-day">Mon</span></div>
+          <div class="bar-col"><div class="bar" style="height:55%"></div><span class="bar-day">Tue</span></div>
+          <div class="bar-col"><div class="bar" style="height:70%"></div><span class="bar-day">Wed</span></div>
+          <div class="bar-col is-today"><div class="bar" style="height:45%"></div><span class="bar-day">Thu</span></div>
+        </div>
+      </section>
+
+      <section class="chart-block">
+        <h2>Recently completed</h2>
+
+        <p class="day-heading">TODAY</p>
+        <ul class="task-list completed-list">
+          <li class="task-row is-completed">
+            <form method="post" action="#" class="toggle-form">
+              <button type="submit" class="task-check is-checked" aria-pressed="true" aria-label="Mark task as not done"></button>
+            </form>
+            <div class="task-body">
+              <p class="task-title">Book dentist appointment</p>
+              <div class="task-meta">
+                <span class="tag">Personal</span>
+                <span class="due">Completed 9:14 AM</span>
+              </div>
+            </div>
+            <form method="post" action="#" class="delete-form">
+              <button class="task-menu" type="submit" aria-label="Delete task">✕</button>
+            </form>
+          </li>
+        </ul>
+
+        <p class="day-heading">YESTERDAY</p>
+        <ul class="task-list completed-list">
+          <li class="task-row is-completed">
+            <form method="post" action="#" class="toggle-form">
+              <button type="submit" class="task-check is-checked" aria-pressed="true" aria-label="Mark task as not done"></button>
+            </form>
+            <div class="task-body">
+              <p class="task-title">Submit expense report</p>
+              <div class="task-meta">
+                <span class="tag">Work</span>
+                <span class="due">Completed 4:47 PM</span>
+              </div>
+            </div>
+            <form method="post" action="#" class="delete-form">
+              <button class="task-menu" type="submit" aria-label="Delete task">✕</button>
+            </form>
+          </li>
+          <li class="task-row is-completed">
+            <form method="post" action="#" class="toggle-form">
+              <button type="submit" class="task-check is-checked" aria-pressed="true" aria-label="Mark task as not done"></button>
+            </form>
+            <div class="task-body">
+              <p class="task-title">Water the balcony plants</p>
+              <div class="task-meta">
+                <span class="tag">Personal</span>
+                <span class="due">Completed 8:02 AM</span>
+              </div>
+            </div>
+            <form method="post" action="#" class="delete-form">
+              <button class="task-menu" type="submit" aria-label="Delete task">✕</button>
+            </form>
+          </li>
+        </ul>
+
+        <p class="day-heading">TUESDAY, 9 SEP</p>
+        <ul class="task-list completed-list">
+          <li class="task-row is-completed">
+            <form method="post" action="#" class="toggle-form">
+              <button type="submit" class="task-check is-checked" aria-pressed="true" aria-label="Mark task as not done"></button>
+            </form>
+            <div class="task-body">
+              <p class="task-title">Return package to post office</p>
+              <div class="task-meta">
+                <span class="tag">Errands</span>
+                <span class="due">Completed 1:20 PM</span>
+              </div>
+            </div>
+            <form method="post" action="#" class="delete-form">
+              <button class="task-menu" type="submit" aria-label="Delete task">✕</button>
+            </form>
+          </li>
+          <li class="task-row is-completed">
+            <form method="post" action="#" class="toggle-form">
+              <button type="submit" class="task-check is-checked" aria-pressed="true" aria-label="Mark task as not done"></button>
+            </form>
+            <div class="task-body">
+              <p class="task-title">Finalize client contract wording</p>
+              <div class="task-meta">
+                <span class="tag">Work</span>
+                <span class="due">Completed 11:35 AM</span>
+              </div>
+            </div>
+            <form method="post" action="#" class="delete-form">
+              <button class="task-menu" type="submit" aria-label="Delete task">✕</button>
+            </form>
+          </li>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
