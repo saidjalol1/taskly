@@ -1,7 +1,6 @@
 from django.db import models
 
 
-
 class CategoryTask(models.Model):
     name = models.CharField(max_length=100, verbose_name="Nomi ...")
 

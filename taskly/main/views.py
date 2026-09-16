@@ -1,10 +1,15 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
+
 from .models import CategoryTask, Task
 from datetime import datetime
 
 
 
-
+@login_required
 def main_view(request):
     context = {
         "categories": CategoryTask.objects.all()
@@ -21,6 +26,7 @@ def main_view(request):
     return render(request, 'index.html', context)
 
 
+@login_required
 def create_post(request):
     if request.method == "POST":
         title = request.POST.get("title")
@@ -38,6 +44,7 @@ def create_post(request):
 
     return redirect('main:asosiy')
 
+@login_required
 def delete_post(request):
     if request.method == "POST":
         task_id = request.POST.get("task_id")
@@ -46,7 +53,7 @@ def delete_post(request):
 
     return redirect("main:asosiy")
 
-
+@login_required
 def toggle_task_status(request):
     if request.method == "POST":
         task_id = request.POST.get("task_id")
@@ -57,3 +64,27 @@ def toggle_task_status(request):
         task.save()
         
     return redirect("main:asosiy")
+
+
+def login_view(request):
+
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        user = authenticate(request=request, username=username, password=password)
+
+        if user is None:
+            messages.error(request, "Sening parol yoki Foydalanuvchi noming no to'gri")
+            return render(request, "login.html")
+
+        login(request, user)
+        messages.success(request, "Hush kelibsiz !")
+        return redirect("main:asosiy")
+
+    return render(request, "login.html")
+
+
+def logout_view(request):
+    logout(request)
+    return redirect("main:login_page")
